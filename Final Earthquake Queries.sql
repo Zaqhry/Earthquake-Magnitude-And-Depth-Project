@@ -26,7 +26,7 @@ FROM Earthquake
 WHERE Magnitude BETWEEN 5.5 AND 6.0
 	GROUP BY Magnitude 
 	ORDER BY Magnitude,
-		     Occurences DESC;
+	         Occurences DESC;
 
 --Earthquakes that fall in the Range of 6.1 AND 6.9
 
@@ -36,7 +36,7 @@ FROM Earthquake
 WHERE Magnitude BETWEEN 6.1 AND 6.9
 	GROUP BY Magnitude 
 	ORDER BY Magnitude,
-			 Occurences DESC;
+		 Occurences DESC;
 
 --Earthquakes that fall in the Range of 7.0 TO 7.9 (Major earthquake. Serious damage.)
 
@@ -46,7 +46,7 @@ FROM Earthquake
 WHERE Magnitude BETWEEN 7.0 AND 7.9
 	GROUP BY Magnitude 
 	ORDER BY Magnitude,
-			 Occurences DESC;
+	         Occurences DESC;
 
 --Earthquakes that fall in the Range of 8.0 or greater (Great earthquake. Can totally destroy communities near the epicenter.)
 
@@ -56,7 +56,7 @@ FROM Earthquake
 WHERE Magnitude = 8.0 OR Magnitude > 8.0
 	GROUP BY Magnitude 
 	ORDER BY Magnitude,
-		     Occurences DESC;
+		 Occurences DESC;
 
 --Avg Depth vs Avg Magnitude, Does a lower Depth correlate with greater Magnitudes?
 
@@ -80,8 +80,8 @@ WHERE Magnitude = 8.0 OR Magnitude > 8.0
 --Average Magnitude & Depth Per Each Individual Country 
 
 SELECT DISTINCT(Place),
-	   AVG(Magnitude) OVER (PARTITION BY Place) AverageMagnitudeMW,
-	   AVG(Depth) OVER (PARTITION BY Place) AverageDepthkm 
+	       AVG(Magnitude) OVER (PARTITION BY Place) AverageMagnitudeMW,
+	       AVG(Depth) OVER (PARTITION BY Place) AverageDepthkm 
 FROM Earthquake;
 
 --Average Magnitude & Depth Across Every Country as a whole 
@@ -102,7 +102,8 @@ SELECT TOP 20 Place,
 	      Magnitude MagnitudeMW,
 	      Depth Depthkm
 FROM Earthquake
-	ORDER BY Magnitude DESC,Depth;
+	ORDER BY Magnitude DESC,
+		 Depth;
 
 --Weakest Earthquakes 
 
@@ -111,7 +112,8 @@ SELECT TOP 20 Place,
 	      Magnitude MagnitudeMW,
 	      Depth Depthkm
 FROM Earthquake
-	ORDER BY Magnitude,Depth DESC; 
+	ORDER BY Magnitude,
+		 Depth DESC; 
 
 --Common Magnitude & Number of Cases 
 
@@ -160,3 +162,5 @@ SELECT Place,
        AVG(Depth) OVER (PARTITION BY Place) AvgDepth
 FROM Earthquake 
 	ORDER BY AvgDepth DESC;
+
+
