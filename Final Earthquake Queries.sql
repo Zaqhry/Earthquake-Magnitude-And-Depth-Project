@@ -18,7 +18,7 @@ SELECT Cause,
 FROM Earthquake
 	GROUP BY Cause;
 
---Earthquakes that fall in the Range of 5.5 TO 6.0 (May cause a lot of damage in very populated areas.)
+--Earthquakes that fall in the Range of 5.5 TO 6.0 (Slight damage to buildings and other structures.)
 
 SELECT Magnitude MagnitudeMW,
        COUNT(*) Occurences
@@ -28,7 +28,7 @@ WHERE Magnitude BETWEEN 5.5 AND 6.0
 	ORDER BY Magnitude,
 	         Occurences DESC;
 
---Earthquakes that fall in the Range of 6.1 AND 6.9
+--Earthquakes that fall in the Range of 6.1 AND 6.9 (May cause a lot of damage in very populated areas.)
 
 SELECT Magnitude MagnitudeMW,
        COUNT(*) Occurences
@@ -95,6 +95,26 @@ FROM Earthquake
 -------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------
 
+--Avg Magnitude Per Earthquake Per Place
+
+SELECT Place,
+       Cause, 
+       AVG(Magnitude) OVER (PARTITION BY Place) AvgMagnitude
+FROM Earthquake 
+	ORDER BY AvgMagnitude DESC;
+
+--Avg Depth Per Earthquake Per Place
+
+SELECT Place,
+       Cause, 
+       AVG(Depth) OVER (PARTITION BY Place) AvgDepth
+FROM Earthquake 
+	ORDER BY AvgDepth DESC;
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
 --Strongest Earthquakes
 
 SELECT TOP 20 Place,
@@ -146,21 +166,5 @@ FROM Earthquake
 -------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------
-
---Avg Magnitude Per Earthquake Per Place
-
-SELECT Place,
-       Cause, 
-       AVG(Magnitude) OVER (PARTITION BY Place) AvgMagnitude
-FROM Earthquake 
-	ORDER BY AvgMagnitude DESC;
-
---Avg Depth Per Earthquake Per Place
-
-SELECT Place,
-       Cause, 
-       AVG(Depth) OVER (PARTITION BY Place) AvgDepth
-FROM Earthquake 
-	ORDER BY AvgDepth DESC;
 
 
