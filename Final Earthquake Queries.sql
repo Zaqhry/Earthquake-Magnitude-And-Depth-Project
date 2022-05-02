@@ -11,7 +11,7 @@ FROM Earthquake;
 SELECT COUNT(*) SumEarthquakes
 FROM Earthquake;
 
---Cause of Earthquake
+--Cause of Earthquakes
 
 SELECT Cause,
        COUNT(Cause) NumCause
